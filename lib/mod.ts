@@ -5,6 +5,7 @@
  * @param source async iterable to convert
  * @returns a promise that returns to an array of elements yielded by the async iterable
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function toArray<T>(source: AsyncIterable<T>): Promise<T[]> {
 	const array: T[] = [];
 
@@ -20,6 +21,7 @@ export async function toArray<T>(source: AsyncIterable<T>): Promise<T[]> {
  * @param source async iterable to convert
  * @returns a promise that returns to a set of unique elements yielded by the async iterable
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function toSet<T>(source: AsyncIterable<T>): Promise<Set<T>> {
 	const set = new Set<T>();
 
@@ -36,6 +38,7 @@ export async function toSet<T>(source: AsyncIterable<T>): Promise<Set<T>> {
  * @param keySelector function invoked for each element
  * @returns a promise that returns to a map of grouped elements
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function groupBy<V, K>(
 	source: AsyncIterable<V>,
 	keySelector: (value: V, index: number) => K,
@@ -62,6 +65,7 @@ export async function groupBy<V, K>(
  * @param source async iterable to count from
  * @returns a promise that returns to the number of elements in the iterable
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function count(source: AsyncIterable<unknown>): Promise<number> {
 	let count = 0;
 
@@ -77,6 +81,7 @@ export async function count(source: AsyncIterable<unknown>): Promise<number> {
  * @param source async iterable to get the first item from
  * @returns a promise that returns the first item, or undefined if empty
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function first<T>(
 	source: AsyncIterable<T>,
 ): Promise<T | undefined> {
@@ -92,6 +97,7 @@ export async function first<T>(
  * @param source async iterable to get the last item from
  * @returns a promise that returns the last item, or undefined if empty
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function last<T>(
 	source: AsyncIterable<T>,
 ): Promise<T | undefined> {
@@ -110,6 +116,7 @@ export async function last<T>(
  * @param predicate function to test each element with
  * @returns a promise that returns true if all elements passes the test, or false if otherwise.
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function every<T>(
 	source: AsyncIterable<T>,
 	predicate: (value: T, index: number) => unknown,
@@ -131,6 +138,7 @@ export async function every<T>(
  * @param predicate function to test each element with
  * @returns a promise that returns true if some elements passes the test, or false if otherwise.
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function some<T>(
 	source: AsyncIterable<T>,
 	predicate: (value: T, index: number) => unknown,
@@ -180,6 +188,7 @@ export function reduce<T, U>(
 	callback: (accu: U, value: T, index: number) => U,
 	initialValue: U,
 ): Promise<U>;
+/*#__NO_SIDE_EFFECTS__*/
 export async function reduce(
 	source: AsyncIterable<any>,
 	callback: (accu: any, value: any, index: number) => any,
@@ -225,6 +234,7 @@ export function find<T>(
 	source: AsyncIterable<T>,
 	predicate: (value: T, index: number) => unknown,
 ): Promise<T | undefined>;
+/*#__NO_SIDE_EFFECTS__*/
 export async function find<T>(
 	source: AsyncIterable<T>,
 	predicate: (value: T, index: number) => unknown,
@@ -258,6 +268,7 @@ export function findLast<T>(
 	source: AsyncIterable<T>,
 	predicate: (value: T, index: number) => unknown,
 ): Promise<T | undefined>;
+/*#__NO_SIDE_EFFECTS__*/
 export async function findLast<T>(
 	source: AsyncIterable<T>,
 	predicate: (value: T, index: number) => unknown,
@@ -280,6 +291,7 @@ export async function findLast<T>(
  * @param callback callback to run for each elements
  * @returns an async iterator yielding the same elements as the source
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function* tap<T>(
 	source: AsyncIterable<T>,
 	callback: (value: T, index: number) => void,
@@ -312,6 +324,7 @@ export function filter<T>(
 	source: AsyncIterable<T>,
 	predicate: (value: T, index: number) => unknown,
 ): AsyncGenerator<T>;
+/*#__NO_SIDE_EFFECTS__*/
 export async function* filter<T>(
 	source: AsyncIterable<T>,
 	predicate: (value: T, index: number) => unknown,
@@ -331,6 +344,7 @@ export async function* filter<T>(
  * @param mapper function to transform each element
  * @returns an async iterator yielding transformed elements
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function* map<T, S>(source: AsyncIterable<T>, mapper: (value: T) => S): AsyncGenerator<S> {
 	for await (const value of source) {
 		yield mapper(value);
@@ -343,6 +357,7 @@ export async function* map<T, S>(source: AsyncIterable<T>, mapper: (value: T) =>
  * @param amount number of elements to take
  * @returns an async iterator yielding the taken elements
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function* take<T>(source: AsyncIterable<T>, amount: number): AsyncGenerator<T> {
 	let count = 0;
 
@@ -361,6 +376,7 @@ export async function* take<T>(source: AsyncIterable<T>, amount: number): AsyncG
  * @param amount number of elements to skip
  * @returns an async iterator yielding from provided source iterable
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function* skip<T>(source: AsyncIterable<T>, amount: number): AsyncGenerator<T> {
 	let count = 0;
 
@@ -383,6 +399,7 @@ function nextResult<T>(iterator: AsyncIterator<T>): Promise<AsyncIteratorNext<T>
  * @param sources async iterables to merge from
  * @returns an async iterator yielding elements from provided source iterables
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function* merge<T>(...sources: AsyncIterable<T>[]): AsyncGenerator<T> {
 	const iterators = sources.map((iterable) => iterable[Symbol.asyncIterator]());
 
@@ -411,6 +428,7 @@ export async function* merge<T>(...sources: AsyncIterable<T>[]): AsyncGenerator<
  * @param size amount of elements in one chunk
  * @returns an async iterator yielding chunked elements
  */
+/*#__NO_SIDE_EFFECTS__*/
 export async function* chunk<T>(source: AsyncIterable<T>, size: number): AsyncGenerator<T[]> {
 	let chunk: T[] = [];
 	let amount = 0;
@@ -441,6 +459,7 @@ interface QueueNode<T> {
  * @param source async iterable to tee from
  * @returns a tuple of two async iterables
  */
+/*#__NO_SIDE_EFFECTS__*/
 export function tee<T>(source: AsyncIterable<T>): [AsyncIterable<T>, AsyncIterable<T>] {
 	const iterator = source[Symbol.asyncIterator]();
 
