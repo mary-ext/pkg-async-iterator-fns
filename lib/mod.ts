@@ -429,7 +429,7 @@ export async function* merge<T>(...sources: AsyncIterable<T>[]): AsyncGenerator<
  * @returns an async iterator yielding chunked elements
  */
 /*#__NO_SIDE_EFFECTS__*/
-export async function* chunk<T>(source: AsyncIterable<T>, size: number): AsyncGenerator<T[]> {
+export async function* chunked<T>(source: AsyncIterable<T>, size: number): AsyncGenerator<T[]> {
 	let chunk: T[] = [];
 	let amount = 0;
 
